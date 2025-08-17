@@ -33,7 +33,3 @@ The goal is to understand factors that influence patient survival times and to b
 - Machine learning models achieve improved predictive accuracy compared to traditional methods.
 - Achieved 0.75 concordance index with Random Survival Forests
 ---
-
-
-cd Survival-Analysis-Of-Cancer-Patients-Data
-pip install -r requirements.txt
