@@ -5,7 +5,7 @@ The goal is to understand factors that influence patient survival times and to b
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 - Perform **Exploratory Data Analysis (EDA)** on cancer survival dataset.
 - Apply **Kaplan-Meier estimator** for survival probability estimation.
 - Compare survival functions across different patient groups (e.g., age, gender, treatment).
@@ -14,7 +14,7 @@ The goal is to understand factors that influence patient survival times and to b
 
 ---
 
-## ⚙️ Methods Used
+##  Methods Used
 - **EDA**: Data cleaning, missing value handling, visualization.
 - **Survival Analysis**:
   - Kaplan-Meier Estimator
@@ -27,7 +27,7 @@ The goal is to understand factors that influence patient survival times and to b
   - Concordance Index (C-Index)
 ---
 
-## 📊 Results
+##  Results
 - Kaplan-Meier curves show clear differences in survival among patient subgroups.
 - Cox model highlights significant clinical predictors of survival.
 - Machine learning models achieve improved predictive accuracy compared to traditional methods.
