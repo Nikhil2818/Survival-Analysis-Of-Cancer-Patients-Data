@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survival Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .result, .error {
+            margin-top: 30px;
+            padding: 15px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .result {
+            background-color: #e8f5e9;
+            border: 1px solid #66bb6a;
+            color: #2e7d32;
+        }
+
+        .error {
+            background-color: #ffebee;
+            border: 1px solid #ef5350;
+            color: #c62828;
+        }
+
+        img {
+            margin-top: 25px;
+            max-width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Patient Survival Prediction</h1>
+
+    <form method="POST">
+        {% for feature in form_features %}
+            <label for="{{ feature }}">{{ feature.replace('_', ' ') }}</label>
+            {% if feature in categorical_options %}
+                <select name="{{ feature }}" id="{{ feature }}">
+                    {% for option in categorical_options[feature] %}
+                        <option value="{{ option }}" {% if form_data[feature] == option %}selected{% endif %}>
+                            {{ option }}
+                        </option>
+                    {% endfor %}
+                </select>
+            {% else %}
+                <input type="number" step="any" name="{{ feature }}" id="{{ feature }}"
+                       value="{{ form_data[feature] if form_data[feature] else '' }}">
+            {% endif %}
+        {% endfor %}
+
+        <button type="submit" class="btn">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            <strong>Predicted Median Survival Time:</strong> {{ prediction }} months
+        </div>
+    {% endif %}
+
+    {% if plot_url %}
+        <div>
+            <h3 style="margin-top: 30px;">Survival Curve</h3>
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Survival Curve">
+        </div>
+    {% endif %}
+
+    {% if error_msg %}
+        <div class="error">
+            <strong>Error:</strong> {{ error_msg }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
